@@ -1,5 +1,7 @@
 EscPos Library for Java
 =
+[![](https://jitpack.io/v/me.alzz/escpos.svg)](https://jitpack.io/#me.alzz/escpos)
+
 A basic Java ESC/POS implementation for receipt printers.
 
  - `EscPosBuilder` provides a fluent style api for preparing ESC/POS data.
@@ -21,15 +23,6 @@ byte[] data = escPos.initialize()
         .getBytes();
 ```
 
-SerialFactory Usage
-=
-```java
-SerialPort port = SerialFactory.jSerialPort("COM3", SerialConfig.CONFIG_9600_8N1());
-
-port.openPort();
-port.getOutputStream().write(data);
-port.closePort();
-```
 
 EscPosBuilder Methods
 =
