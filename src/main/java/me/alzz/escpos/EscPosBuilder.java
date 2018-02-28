@@ -1,6 +1,6 @@
-package email.com.gmail.ttsai0509.escpos;
+package me.alzz.escpos;
 
-import email.com.gmail.ttsai0509.escpos.command.*;
+import me.alzz.escpos.command.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,10 +8,30 @@ import java.io.UncheckedIOException;
 
 public class EscPosBuilder {
 
+    /**
+     * 58毫米机器
+     */
+    public static final int TYPE_58MM = 0;
+    /**
+     * 80毫米机器
+     */
+    public static final int TYPE_80MM = 1;
+
     private final ByteArrayOutputStream out;
+    private final int type;
 
     public EscPosBuilder() {
+        this(TYPE_58MM);
+    }
+
+    public EscPosBuilder(int type) {
         this.out = new ByteArrayOutputStream();
+        this.type = type;
+    }
+
+    public EscPosBuilder initialize() {
+        Initialize.Instance.uncheckedWrite(out);
+        return this;
     }
 
     public EscPosBuilder raw(int val) {
@@ -32,10 +52,10 @@ public class EscPosBuilder {
         return this;
     }
 
-    public EscPosBuilder raw(byte... vals) {
-        if (vals != null)
+    public EscPosBuilder raw(byte... bytes) {
+        if (bytes != null)
             try {
-                Raw.Instance.write(out, vals);
+                Raw.Instance.write(out, bytes);
             } catch (IOException e) {
                 throw new UncheckedIOException(e);
             }
@@ -52,9 +72,8 @@ public class EscPosBuilder {
         return this;
     }
 
-    public EscPosBuilder initialize() {
-        Initialize.Instance.uncheckedWrite(out);
-        return this;
+    public EscPosBuilder br() {
+        return text("\r\n");
     }
 
     public EscPosBuilder feed() {

@@ -1,4 +1,4 @@
-package email.com.gmail.ttsai0509.escpos.command;
+package me.alzz.escpos.command;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,8 +24,8 @@ public enum Raw implements Command {
         out.write(string.getBytes());
     }
 
-    public void write(OutputStream out, byte[] vals) throws IOException {
-        out.write(vals);
+    public void write(OutputStream out, byte[] data) throws IOException {
+        out.write(data);
     }
 
 }

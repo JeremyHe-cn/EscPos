@@ -1,4 +1,4 @@
-package email.com.gmail.ttsai0509.escpos.command;
+package me.alzz.escpos.command;
 
 import java.io.IOException;
 import java.io.OutputStream;
