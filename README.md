@@ -5,8 +5,6 @@ EscPos Library for Java
 A basic Java ESC/POS implementation for receipt printers.
 
  - `EscPosBuilder` provides a fluent style api for preparing ESC/POS data.
- - `SerialFactory` is a type-safe solution for obtaining SerialPort connections
-on any platform.
 
 
 EscPosBuilder Usage

@@ -91,40 +91,57 @@ public class EscPosBuilder {
     }
 
     public EscPosBuilder font(Font font) {
-        if (font != null)
+        if (font != null) {
             font.uncheckedWrite(out);
+        }
         return this;
     }
 
     public EscPosBuilder align(Align align) {
-        if (align != null)
+        if (align != null) {
             align.uncheckedWrite(out);
+        }
         return this;
     }
 
     public EscPosBuilder cut(Cut cut) {
-        if (cut != null)
+        if (cut != null) {
             cut.uncheckedWrite(out);
+        }
         return this;
     }
 
     public EscPosBuilder kick(DrawerKick kick) {
-        if (kick != null)
+        if (kick != null) {
             try {
                 kick.write(out);
             } catch (IOException e) {
                 throw new UncheckedIOException(e);
             }
+        }
         return this;
     }
 
     public EscPosBuilder kick(DrawerKick kick, int t1Pulse, int t2Pulse) {
-        if (kick != null)
+        if (kick != null) {
             try {
                 kick.write(out, t1Pulse <= 0 ? 0 : t1Pulse, t2Pulse <= 0 ? 0 : t2Pulse);
             } catch (IOException e) {
                 throw new UncheckedIOException(e);
             }
+        }
+        return this;
+    }
+
+    public EscPosBuilder chineseMode(boolean on) {
+        if (on) {
+            out.write(28);
+            out.write(38);
+        } else {
+            out.write(28);
+            out.write(46);
+        }
+
         return this;
     }
 
