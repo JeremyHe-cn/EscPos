@@ -235,7 +235,7 @@ public class EscPosBuilder {
                 int spaceWidth = start2 - end1;
                 line = String.format("%-" + (text1.length() + spaceWidth) + "s%s", text1, text2);
             } else {
-                line = String.format("%s\r\n%-" + cell1Width + "s%s", text1, " ", text2);
+                line = String.format("%s\r\n%-" + start2 + "s%s", text1, " ", text2);
             }
 
             final int end2 = cell1Width + cell2Width;
