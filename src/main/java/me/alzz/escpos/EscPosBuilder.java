@@ -21,17 +21,31 @@ public class EscPosBuilder {
     private final ByteArrayOutputStream out;
     private final int width;
 
+    /**
+     * 默认编码为 utf-8
+     */
+    private String charsetName = "UTF-8";
+
     public EscPosBuilder() {
         this(TYPE_58MM);
     }
 
     public EscPosBuilder(int type) {
+        this(type, "UTF-8");
+    }
+
+    public EscPosBuilder(String charsetName) {
+        this(TYPE_58MM, charsetName);
+    }
+
+    public EscPosBuilder(int type, String charsetName) {
         this.out = new ByteArrayOutputStream();
         if (type == TYPE_58MM) {
             width = 32;
         } else {
             width = 47;
         }
+        this.charsetName = charsetName;
     }
 
     public EscPosBuilder initialize() {
@@ -70,7 +84,7 @@ public class EscPosBuilder {
     public EscPosBuilder text(String text) {
         if (text != null)
             try {
-                Raw.Instance.write(out, text);
+                Raw.Instance.write(out, text, charsetName);
             } catch (IOException e) {
                 throw new UncheckedIOException(e);
             }

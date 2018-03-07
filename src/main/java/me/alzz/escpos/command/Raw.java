@@ -20,8 +20,8 @@ public enum Raw implements Command {
         out.write(val);
     }
 
-    public void write(OutputStream out, String string) throws IOException {
-        out.write(string.getBytes());
+    public void write(OutputStream out, String string, String charsetName) throws IOException {
+        out.write(string.getBytes(charsetName));
     }
 
     public void write(OutputStream out, byte[] data) throws IOException {
