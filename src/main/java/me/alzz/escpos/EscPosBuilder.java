@@ -116,6 +116,13 @@ public class EscPosBuilder {
         return this;
     }
 
+    public EscPosBuilder font(GSFont font) {
+        if (font != null) {
+            font.uncheckedWrite(out);
+        }
+        return this;
+    }
+
     public EscPosBuilder align(Align align) {
         if (align != null) {
             align.uncheckedWrite(out);
