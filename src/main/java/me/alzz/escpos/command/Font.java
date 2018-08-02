@@ -12,10 +12,7 @@ public enum Font implements Command {
     EMPHASIZED(0x08),
     DH_EMPHASIZED(0x18),
     DW_EMPHASIZED(0x28),
-    DWDH_EMPHASIZED(0x38),
-    NORMAL(0x00),
-    MIDDLE(0x01),
-    BIG(0x11);
+    DWDH_EMPHASIZED(0x38);
 
     private final int code;
 
@@ -25,13 +22,8 @@ public enum Font implements Command {
 
     @Override
     public void write(OutputStream out) throws IOException {
-        if (this == NORMAL || this == MIDDLE || this == BIG) {
-            out.write(0x1D);
-            out.write(0x21);
-        } else {
-            out.write(0x1B);
-            out.write(0x21);
-        }
+        out.write(0x1B);
+        out.write(0x21);
         out.write(code);
     }
 
