@@ -1,5 +1,6 @@
 package me.alzz.escpos;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import me.alzz.escpos.command.*;
 
 import java.io.ByteArrayOutputStream;
@@ -88,6 +89,30 @@ public class EscPosBuilder {
             } catch (IOException e) {
                 throw new UncheckedIOException(e);
             }
+        return this;
+    }
+
+    public EscPosBuilder qrCode(String content) {
+        int storeLen = content.length() + 3;
+        int storePL = storeLen % 256;
+        int storePH = storeLen / 256;
+
+        byte cmd[] = {
+                0x1d, 0x28, 0x6b, 0x04, 0x00, 0x31, 0x41, 0x32, 0x00,     // model
+                0x1d, 0x28, 0x6b, 0x03, 0x00, 0x31, 0x43, 0x08,           // size
+                0x1d, 0x28, 0x6b, 0x03, 0x00, 0x31, 0x45, 0x31,           // error
+                0x1d, 0x28, 0x6b, (byte) storePL, (byte) storePH, 0x31, 0x50, 0x30    // store
+        };
+
+        byte end[] = {0x1d, 0x28, 0x6b, 0x03, 0x00, 0x31, 0x51, 0x30};
+
+        initialize();
+        align(Align.CENTER);
+        raw(cmd);
+        text(content);
+        raw(end);
+        br();
+
         return this;
     }
 
