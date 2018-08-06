@@ -1,6 +1,5 @@
 package me.alzz.escpos;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import me.alzz.escpos.command.*;
 
 import java.io.ByteArrayOutputStream;
